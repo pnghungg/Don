@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate Xu Xu 🌸</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!--
+    FIX #6 — Cloudflare Turnstile (bảo vệ form khỏi spam/bot)
+    Hướng dẫn:
+      1. Tạo Turnstile site tại https://dash.cloudflare.com/?to=/:account/turnstile
+      2. Thay YOUR_TURNSTILE_SITE_KEY bằng Site Key thật
+      3. Đặt TURNSTILE_ENABLED=true trong wrangler.toml [vars]
+      4. Chạy: wrangler secret put TURNSTILE_SECRET
+    Nếu chưa cấu hình Turnstile, xóa 2 dòng script + div bên dưới
+    và đặt TURNSTILE_ENABLED=false trong wrangler.toml.
+  -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+  <div class="petals"></div>
+
+  <div class="container">
+    <h1>🌸 Donate Xu Xu 🌸</h1>
+    <p class="subtitle">Cảm ơn bạn đã ủng hộ! 💕</p>
+
+    <div class="form-group">
+      <label for="name">Tên của bạn</label>
+      <input
+        type="text"
+        id="name"
+        placeholder="Nhập tên..."
+        maxlength="30"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="message">Lời nhắn</label>
+      <textarea
+        id="message"
+        placeholder="Nhập lời nhắn..."
+        rows="3"
+        maxlength="300"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="amount">Số tiền (VNĐ)</label>
+      <input
+        type="number"
+        id="amount"
+        placeholder="Để trống nếu tùy ý..."
+        min="0"
+      />
+    </div>
+
+    <!--
+      FIX #6 — Widget Turnstile
+      Thay YOUR_TURNSTILE_SITE_KEY bằng Site Key của bạn.
+      Xóa div này nếu không dùng Turnstile.
+    -->
+    <div class="form-group">
+      <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="light"></div>
+    </div>
+
+    <button id="createBtn" onclick="createQR()">🎀 TẠO QR</button>
+
+    <div id="result" style="display:none;">
+      <h2>Mã QR của bạn</h2>
+
+      <img id="qr" src="" alt="QR Code" style="max-width:280px;" />
+
+      <div class="info-box">
+        <p>🏦 Ngân hàng: <strong id="bank"></strong></p>
+        <p>💳 Số tài khoản: <strong id="account"></strong></p>
+        <p>👤 Chủ tài khoản: <strong id="owner"></strong></p>
+        <p>⏰ Hết hạn sau: <strong id="expire"></strong></p>
+        <p>🔑 Mã donate: <strong id="code"></strong>
+          <button onclick="copyCode()" style="margin-left:8px;">📋 Sao chép</button>
+        </p>
+      </div>
+
+      <button onclick="downloadQR()">⬇️ Tải QR</button>
+      <button onclick="newDonate()">🔄 Donate mới</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

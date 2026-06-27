@@ -1,0 +1,56 @@
+#######################################################
+# wrangler.toml — Donate Xu Xu (Cloudflare)
+#
+# FIX #4  — BANK_ID, ACCOUNT_NUMBER, ACCOUNT_NAME đọc từ [vars]
+# FIX #7  — Durable Object binding cho DonateCounter
+#######################################################
+
+name = "donate-xuxu"
+main = "functions/worker.js"
+compatibility_date = "2024-01-01"
+
+#######################################################
+# FIX #4 — Biến không nhạy cảm (có thể commit)
+#######################################################
+[vars]
+BANK_ID            = "VCB"
+ACCOUNT_NUMBER     = "1048883539"
+ACCOUNT_NAME       = "TRẦN THỊ MINH LY"
+QR_STYLE           = "compact2"
+QR_EXPIRE_MINUTES  = "30"
+CODE_PREFIX        = "HZ"
+DEBUG              = "true"
+
+# Turnstile: đặt "true" để bật, "false" để tắt (FIX #6)
+# TURNSTILE_ENABLED = "true"
+
+#######################################################
+# FIX #7 — Durable Object: serialize writes, thay LockService
+#######################################################
+[[durable_objects.bindings]]
+name       = "DONATE_COUNTER"
+class_name = "DonateCounter"
+
+[[migrations]]
+tag         = "v1"
+new_classes = ["DonateCounter"]
+
+#######################################################
+# Cloudflare Pages (nếu dùng Pages + Workers)
+#######################################################
+# pages_build_output_dir = "pages"
+
+#######################################################
+# Secrets (KHÔNG đặt ở đây — dùng lệnh bên dưới)
+#
+#   wrangler secret put SPREADSHEET_ID
+#   wrangler secret put GOOGLE_CLIENT_EMAIL
+#   wrangler secret put GOOGLE_PRIVATE_KEY
+#   wrangler secret put GOOGLE_PROJECT_ID
+#   wrangler secret put TURNSTILE_SECRET      # FIX #6
+#
+# Đổi thông tin ngân hàng (FIX #4):
+#   wrangler secret put ACCOUNT_NUMBER
+#   wrangler secret put ACCOUNT_NAME
+#   wrangler secret put BANK_ID
+#######################################################

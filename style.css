@@ -1,0 +1,214 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(180deg,#ffd6ec,#ffeaf5,#fff8fc);
+    overflow-x:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.container{
+    position:relative;
+    width:100%;
+    max-width:520px;
+    margin:0 auto;
+    padding:12px;
+}
+
+.card{
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(18px);
+  border:2px solid rgba(255,182,220,.5);
+  border-radius:22px;
+  padding:24px;
+  margin-bottom:20px;
+  box-shadow:0 10px 35px rgba(255,120,180,.2);
+}
+
+.logo{
+  font-size:46px;
+  text-align:center;
+}
+
+h1,h2{
+  text-align:center;
+  margin-top:10px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#cbd5e1;
+  margin:8px 0 20px;
+}
+
+.form-group{
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  margin-bottom:8px;
+  font-weight:bold;
+}
+
+input,textarea{
+  width:100%;
+  border:none;
+  border-radius:12px;
+  padding:14px;
+  background:#334155;
+  color:#fff;
+  font-size:16px;
+  outline:none;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,#ff6fb5,#ff9fcf);
+  color:#fff;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.25s;
+  margin-top:8px;
+}
+
+button:hover{
+  background:#6d28d9;
+}
+
+.qr{
+  display:block;
+  width:220px;
+  margin:18px auto;
+  background:#fff;
+  padding:10px;
+  border-radius:12px;
+}
+
+.info{
+  line-height:1.8;
+}
+
+.buttons{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+}
+
+@media (max-width:480px){
+  body{padding:12px;}
+  .card{padding:18px;}
+}
+
+.social-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+    margin:18px 0;
+
+}
+
+.social-btn{
+
+    flex:1;
+
+    text-align:center;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+}
+
+.social-btn:hover{
+
+    transform:translateY(-2px);
+
+    opacity:.9;
+
+}
+
+.facebook{
+
+    background:#1877F2;
+
+}
+
+.zalo{
+
+    background:#0068FF;
+
+}
+.petals{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:2;
+}
+
+.petal{
+    position:absolute;
+    top:-40px;
+    font-size:18px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+
+0%{
+    transform:
+        translateY(-30px)
+        rotate(0deg);
+    opacity:1;
+}
+
+100%{
+    transform:
+        translateY(110vh)
+        rotate(360deg);
+    opacity:.2;
+}
+
+}
+.card{
+    width:calc(100vw - 24px);
+    max-width:480px;
+    margin:auto;
+}
+
+.card{
+    overflow:hidden;
+}
+.card>*{
+    position:relative;
+    z-index:5;
+}
